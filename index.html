@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca Filmes 2.0</title>
+    <link rel="shortcut icon" type="image/x-icon" href="imagem/icone.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+            background-image: url('imagem/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .centered {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Ajuste da cor de fundo do card-body */
+        .card.bg-dark.text-white {
+            background-color: rgba(0, 0, 0, 0.8); /* Ajuste a opacidade conforme necessário */
+        }
+
+        /* Estilo para o efeito de digitação */
+        .typing-effect {
+            overflow: hidden; /* Para garantir que o texto não escape da div */
+            white-space: nowrap; /* Evita quebras de linha */
+            border-right: 2px solid orange; /* Efeito de cursor piscando */
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange }
+        }
+
+        /* Estilo para sublinhar o código */
+        mark {
+            text-decoration: underline;
+            text-decoration-color: orange;
+        }
+
+        /* Estilo para o select menu */
+        .custom-select {
+            width: 100%;
+            color: #ffffff; /* Cor do texto */
+            background-color: #343a40; /* Cor de fundo */
+            border-color: #343a40;
+        }
+
+        .custom-select option {
+            background-color: #343a40;
+            color: #ffffff; /* Cor do texto das opções */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card" style="background-color: rgba(0, 0, 0, 0.8); color: white;">
+                    <div class="card-header text-center">
+                        <img src="imagem/logo.png" width="300" alt=""/>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center mb-3">
+                            <a href="https://www.imdb.com/" target="_blank" title="Buscar título no IMDb" style="margin: 0 10px;">
+                                <img src="imagem/imdb.png" alt="" width="60"/>
+                            </a>
+                            <a href="https://adoniasalmeida.github.io/webtv/" target="_blank" title="Ver TV Online" style="margin: 0 10px;">
+                                <img src="imagem/webtv.png" alt="" width="100"/>
+                            </a>
+                            <a href="https://www.themoviedb.org/" target="_blank" title="Base de dados para informações sobre títulos, capas, logos e mais..." style="margin: 0 10px;">
+                                <img src="imagem/tmdb.png" alt="" width="50"/>
+                            </a>
+                            <a href="https://brave.com/pt-br/" target="_blank" title="Navegador recomendado para melhor desempenho e bloqueio de propaganda de terceiros" style="margin: 0 10px;">
+                                <img src="imagem/brave.png" alt="" width="100"/>
+                            </a>
+                        </div>
+
+                        <div class="row justify-content-center mb-3">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <input type="radio" id="filme-radio" name="mediaType" value="filme" required> Filme
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" id="serie-radio" name="mediaType" value="serie"> Série
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select id="select-opcao" class="custom-select">
+                                        <option selected value="1">WarezCDN</option>
+                                        <option value="2">WarezStream</option>
+                                        <option value="3">SuperCDN</option>
+                                        <option value="4">Embedder</option>
+                                        <option value="5">Embedflix</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="pesquisa" class="form-control" maxlength="10" placeholder="Digite o código..." style="width: 200px;">
+                                <div class="input-group-append">
+                                    <button id="submit-button" class="btn btn-danger" type="button">Pesquisar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mb-3">
+                            <p style="font-family:'Roboto', sans-serif;">
+                                <span class="typing-effect">www.imdb.com/title/<mark>tt0111161</mark>/ Copie, cole e pesquise!</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="index.html" class="btn btn-link" title="Página Inicial" onclick="window.location.href='index.html';">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="#" class="btn btn-link" title="Como buscar filmes e séries?" onclick="openPopup('ajuda.html');">
+                            <i class="fas fa-question-circle"></i>
+                        </a>
+                        <a href="#" class="btn btn-link" title="Conheça o autor" onclick="openPopup('sobre.html');">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $("#submit-button").prop('disabled', true); // disable submit button initially
+        $('input[type="radio"]').on('change', function() {
+            $("#submit-button").prop('disabled', false); // enable submit button if a radio is selected
+        });
+
+        $("#submit-button").on('click', function() {
+            var query = '';
+            var optionSelected = $("#select-opcao").val();
+
+            if (optionSelected == "1") {
+                if ($("#filme-radio").is(":checked")) {
+                    query += "filme/";
+                }
+                if ($("#serie-radio").is(":checked")) {
+                    query += "serie/";
+                }
+                if (query) {
+                    window.location.href = "https://embed.warezcdn.com/" + query + $("#pesquisa").val();
+                }
+            } else if (optionSelected == "2") {
+                if ($("#filme-radio").is(":checked")) {
+                    query += "movie/";
+                }
+                if ($("#serie-radio").is(":checked")) {
+                    query += "tvshow/";
+                }
+                if (query) {
+                    window.location.href = "https://warezstream.net/" + query + $("#pesquisa").val();
+                }
+            } else if (optionSelected == "3") {
+                if ($("#filme-radio").is(":checked")) {
+                    query += "movie/";
+                }
+                if ($("#serie-radio").is(":checked")) {
+                    query += "tvshow/";
+                }
+                if (query) {
+                    window.location.href = "https://supercdn.org/" + query + $("#pesquisa").val();
+                }
+            } else if (optionSelected == "4") {
+                if ($("#filme-radio").is(":checked")) {
+                    query += "e/movie?imdb=";
+                }
+                if ($("#serie-radio").is(":checked")) {
+                    query += "e/series?imdb=";
+                }
+                if (query) {
+                    window.location.href = "https://embedder.net/" + query + $("#pesquisa").val();
+                }
+            } else if (optionSelected == "5") {
+                if ($("#filme-radio").is(":checked")) {
+                    query += "filme/";
+                }
+                if ($("#serie-radio").is(":checked")) {
+                    query += "serie/";
+                }
+                if (query) {
+                    window.location.href = "https://embedflix.online/" + query + $("#pesquisa").val();
+                }
+            } else {
+                // Handle other options if needed
+            }
+        });
+
+        function openPopup(page) {
+            var popupWindow = window.open(page, 'PopupWindow', 'width=600,height=600,scrollbars=yes,resizable=yes');
+        }
+    </script>
+</body>
+</html>

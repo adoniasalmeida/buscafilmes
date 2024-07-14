@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .accordion-item {
+            margin-bottom: 20px;
+        }
+        .accordion-header {
+            cursor: pointer;
+        }
+        .accordion-body {
+            display: none;
+        }
+        .accordion-body.show {
+            display: block;
+        }
+        .blinking {
+            animation: blink 1s infinite;
+            color: red;
+            font-size: 20px;
+        }
+        @keyframes blink {
+            50% {
+                color: transparent;
+            }
+        }
+        .typing-effect {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid orange;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+            margin-top: 10px;
+        }
+        @keyframes typing {
+            from {
+                width: 0
+            }
+            to {
+                width: 100%
+            }
+        }
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent
+            }
+            50% {
+                border-color: orange
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mt-5">AJUDA</h1>
+
+                <div class="accordion" id="accordionHelp">
+                    <div class="card accordion-item">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link accordion-header" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Como pesquisar filmes e séries?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse accordion-body show" aria-labelledby="headingOne" data-parent="#accordionHelp">
+                            <div class="card-body">
+                                <p>Para buscar conteúdo, clique no ícone do IMDb abaixo, você será direcionado ao site. Na barra de pesquisa do IMDb, digite o nome do título desejado.</p>
+                                <a href="https://www.imdb.com/" target="_blank"><img src="https://i.ibb.co/hK6BBtm/imdb.png" alt="" width="40"/></a>
+                                <img src="imagem/barraimdb.png" alt="" class="img-fluid mt-3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card accordion-item">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link accordion-header collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Qual código do título devo copiar?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse accordion-body" aria-labelledby="headingTwo" data-parent="#accordionHelp">
+                            <div class="card-body">
+                                <p>Após selecionar o título desejado no IMDb, na barra de endereço do seu navegador terá algo como <strong>www.imdb.com/title/<mark>tt0111161</mark>/</strong>. Copie este código exatamente como está no exemplo e cole no campo de pesquisa de nosso site.</p>
+                                <img src="imagem/modelolink.png" alt="" class="img-fluid mt-3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card accordion-item">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link accordion-header collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Deu erro, o que pode ser?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse accordion-body" aria-labelledby="headingThree" data-parent="#accordionHelp">
+                            <div class="card-body">
+                                <p>Se você recebeu um erro ao pesquisar no BuscaFilmes, aqui estão alguns possíveis motivos:</p>
+                                <center><img src="imagem/atencao.png" alt="" class="img-fluid">
+                                <ol></center><br>
+                                    <li>Você copiou o código do IMDb incorretamente, por exemplo: <strong>TT0111161</strong></li>
+                                    <li>Você não selecionou corretamente o botão de Filme ou Série.</li>
+                                    <li>O título não está disponível na base de dados dos servidores.</li>
+                                </ol>
+                                <p>Lembre-se sempre de selecionar a opção de Filme ou Série para que sua busca seja bem-sucedida.</p>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p style="font-size: 24px;"><span class="typing-effect"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS e dependências opcionais (se necessário) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Efeito de digitação no texto "NEM TODOS OS TÍTULOS VOCÊ VAI ENCONTRAR!"
+            var text = "NEM TODOS OS TÍTULOS VOCÊ VAI ENCONTRAR!";
+            var delay = 100;
+            $.each(text.split(''), function(i, letter){
+                setTimeout(function(){
+                    $('.typing-effect').html($('.typing-effect').html() + letter);
+                }, delay * i);
+            });
+        });
+    </script>
+</body>
+</html>
