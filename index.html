@@ -9,65 +9,59 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            font-family: 'Outfit', Arial, sans-serif;
-            background-image: url('imagem/background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        .centered {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-        }
+body {
+    font-family: 'Outfit', Arial, sans-serif;
+    background-image: url('imagem/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
-        /* Ajuste da cor de fundo do card-body */
-        .card.bg-dark.text-white {
-            background-color: rgba(0, 0, 0, 0.8); /* Ajuste a opacidade conforme necessário */
-        }
+.centered {
+    text-align: center;
+    margin-top: 20px;
+}
 
-        /* Estilo para o efeito de digitação */
-        .typing-effect {
-            overflow: hidden; /* Para garantir que o texto não escape da div */
-            white-space: nowrap; /* Evita quebras de linha */
-            border-right: 2px solid orange; /* Efeito de cursor piscando */
-            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
+.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
+.typing-effect {
+    overflow: hidden; /* Para garantir que o texto não escape da div */
+    white-space: nowrap; /* Evita quebras de linha */
+    border-right: 2px solid orange; /* Efeito de cursor piscando */
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
 
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange }
-        }
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
 
-        /* Estilo para sublinhar o código */
-        mark {
-            text-decoration: underline;
-            text-decoration-color: orange;
-        }
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+}
 
-        /* Estilo para o select menu */
-        .custom-select {
-            width: 100%;
-            color: #ffffff; /* Cor do texto */
-            background-color: #343a40; /* Cor de fundo */
-            border-color: #343a40;
-        }
+mark {
+    text-decoration: underline;
+    text-decoration-color: orange;
+}
 
-        .custom-select option {
-            background-color: #343a40;
-            color: #ffffff; /* Cor do texto das opções */
-        }
+/* Customize the form select appearance if necessary */
+.select {
+    background-color: #343a40; /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+}
+
+.select select {
+    background-color: #343a40; /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+}
+
     </style>
 </head>
 <body>

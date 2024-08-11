@@ -36,13 +36,14 @@
                 color: transparent;
             }
         }
-        .typing-effect {
+     .typing-effect {
             display: inline-block;
             overflow: hidden;
             white-space: nowrap;
             border-right: .15em solid orange;
             animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
             margin-top: 10px;
+            font-size: 18px; /* Definindo o tamanho da fonte para 18px */
         }
         @keyframes typing {
             from {
@@ -106,21 +107,35 @@
                         <div class="card-header" id="headingThree">
                             <h2 class="mb-0">
                                 <button class="btn btn-link accordion-header collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Deu erro, o que pode ser?
+                                    Meu site não é permitido?
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseThree" class="collapse accordion-body" aria-labelledby="headingThree" data-parent="#accordionHelp">
                             <div class="card-body">
+                                <p>Se ao realizar sua pesquisa você receber uma mensagem informando que o acesso ao site não é permitido, por favor, atualize a página no seu navegador para concluir a pesquisa corretamente.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card accordion-item">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link accordion-header collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Deu erro, o que pode ser?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseFour" class="collapse accordion-body" aria-labelledby="headingFour" data-parent="#accordionHelp">
+                            <div class="card-body">
                                 <p>Se você recebeu um erro ao pesquisar no BuscaFilmes, aqui estão alguns possíveis motivos:</p>
-                                <center><img src="imagem/atencao.png" alt="" class="img-fluid">
-                                <ol></center><br>
+                                <center><img src="imagem/atencao.png" alt="" class="img-fluid"></center>
+                                <ol>
                                     <li>Você copiou o código do IMDb incorretamente, por exemplo: <strong>TT0111161</strong></li>
                                     <li>Você não selecionou corretamente o botão de Filme ou Série.</li>
-                                    <li>O título não está disponível na base de dados dos servidores.</li>
+                                    <li>O título não está disponível na base de dados do servidor, escolha outro e realize a busca.</li>
                                 </ol>
                                 <p>Lembre-se sempre de selecionar a opção de Filme ou Série para que sua busca seja bem-sucedida.</p>
-                              
                             </div>
                         </div>
                     </div>
@@ -133,13 +148,13 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS e dependências opcionais (se necessário) -->
+       <!-- Bootstrap JS e dependências opcionais (se necessário) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Efeito de digitação no texto "NEM TODOS OS TÍTULOS VOCÊ VAI ENCONTRAR!"
-            var text = "NEM TODOS OS TÍTULOS VOCÊ VAI ENCONTRAR!";
+            // Efeito de digitação no texto "NEM TODOS OS TÍTULOS ESTÃO DISPONÍVEL!"
+            var text = "NEM TODOS OS TÍTULOS ESTÃO DISPONÍVEL!";
             var delay = 100;
             $.each(text.split(''), function(i, letter){
                 setTimeout(function(){
