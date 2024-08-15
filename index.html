@@ -6,62 +6,99 @@
     <title>Busca Filmes 2.0</title>
     <link rel="shortcut icon" type="image/x-icon" href="imagem/icone.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-body {
-    font-family: 'Outfit', Arial, sans-serif;
-    background-image: url('imagem/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Adiciona um efeito de paralaxe */
+        }
 
-.centered {
-    text-align: center;
-    margin-top: 20px;
-}
+        .centered {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-.footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-}
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
 
-.typing-effect {
-    overflow: hidden; /* Para garantir que o texto não escape da div */
-    white-space: nowrap; /* Evita quebras de linha */
-    border-right: 2px solid orange; /* Efeito de cursor piscando */
-    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-}
+        .typing-effect {
+            overflow: hidden; /* Para garantir que o texto não escape da div */
+            white-space: nowrap; /* Evita quebras de linha */
+            border-right: 2px solid orange; /* Efeito de cursor piscando */
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
 
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
 
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: orange }
-}
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange }
+        }
 
-mark {
-    text-decoration: underline;
-    text-decoration-color: orange;
-}
+        mark {
+            text-decoration: underline;
+            text-decoration-color: orange;
+        }
 
-/* Customize the form select appearance if necessary */
-.select {
-    background-color: #343a40; /* Cor de fundo */
-    color: #ffffff; /* Cor do texto */
-}
+        .select {
+            background-color: #343a40; /* Cor de fundo */
+            color: #ffffff; /* Cor do texto */
+        }
 
-.select select {
-    background-color: #343a40; /* Cor de fundo */
-    color: #ffffff; /* Cor do texto */
-}
+        .select select {
+            background-color: #343a40; /* Cor de fundo */
+            color: #ffffff; /* Cor do texto */
+        }
 
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 15px; /* Borda arredondada */
+            width: 80%; /* Ajuste o tamanho conforme necessário */
+            height: 80%; /* Ajuste o tamanho conforme necessário */
+            max-width: 1200px; /* Tamanho máximo */
+            max-height: 800px; /* Altura máxima */
+            position: relative;
+            overflow: hidden; /* Adiciona uma barra de rolagem se o conteúdo for maior */
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 24px; /* Tamanho do ícone */
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-close:hover {
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -139,9 +176,40 @@ mark {
         </div>
     </div>
 
+    <!-- Pop-up Container -->
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <iframe id="popup-iframe" src="" width="100%" height="100%" style="border:none;"></iframe>
+            <button class="popup-close" onclick="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Lista de imagens de fundo
+        const backgrounds = [
+            'imagem/background.jpg',
+            'imagem/background1.jpg',
+            'imagem/background2.jpg',
+	    'imagem/background3.jpg',
+            'imagem/background4.png',
+            // Adicione mais imagens conforme necessário
+        ];
+
+        // Função para escolher uma imagem de fundo aleatória
+        function setRandomBackground() {
+            // Escolhe um índice aleatório da lista de imagens
+            const randomIndex = Math.floor(Math.random() * backgrounds.length);
+            // Define a imagem de fundo no estilo do body
+            document.body.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
+        }
+
+        // Chama a função quando a página carrega
+        window.onload = setRandomBackground;
+
         $("#submit-button").prop('disabled', true); // disable submit button initially
         $('input[type="radio"]').on('change', function() {
             $("#submit-button").prop('disabled', false); // enable submit button if a radio is selected
@@ -207,7 +275,15 @@ mark {
         });
 
         function openPopup(page) {
-            var popupWindow = window.open(page, 'PopupWindow', 'width=600,height=600,scrollbars=yes,resizable=yes');
+            var popup = document.getElementById('popup');
+            var iframe = document.getElementById('popup-iframe');
+            iframe.src = page;
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
         }
     </script>
 </body>

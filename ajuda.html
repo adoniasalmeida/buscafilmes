@@ -8,6 +8,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Outfit', Arial, sans-serif;
@@ -36,29 +38,48 @@
                 color: transparent;
             }
         }
-     .typing-effect {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: .15em solid orange;
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
-            margin-top: 10px;
-            font-size: 18px; /* Definindo o tamanho da fonte para 18px */
+        .pulsing-text {
+            font-size: 24px; /* Tamanho do texto */
+            font-weight: bold;
+            color: orange; /* Cor do texto */
+            animation: pulse 2s infinite; /* Adiciona a animação de pulsar */
+            text-align: center;
         }
-        @keyframes typing {
-            from {
-                width: 0
-            }
-            to {
-                width: 100%
-            }
-        }
-        @keyframes blink-caret {
-            from, to {
-                border-color: transparent
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
             }
             50% {
-                border-color: orange
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .refresh-icon {
+            font-size: 24px;
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .arrow {
+            display: inline-block;
+            font-size: 24px;
+            margin-left: 10px;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
             }
         }
     </style>
@@ -81,8 +102,8 @@
                         <div id="collapseOne" class="collapse accordion-body show" aria-labelledby="headingOne" data-parent="#accordionHelp">
                             <div class="card-body">
                                 <p>Para buscar conteúdo, clique no ícone do IMDb abaixo, você será direcionado ao site. Na barra de pesquisa do IMDb, digite o nome do título desejado.</p>
-                                <a href="https://www.imdb.com/" target="_blank"><img src="https://i.ibb.co/hK6BBtm/imdb.png" alt="" width="40"/></a>
-                                <img src="imagem/barraimdb.png" alt="" class="img-fluid mt-3">
+                                <a href="https://www.imdb.com/" target="_blank"><img src="https://i.ibb.co/hK6BBtm/imdb.png" alt="Ícone do IMDb" width="40"/></a>
+                                <img src="imagem/barraimdb.png" alt="Barra de pesquisa do IMDb" class="img-fluid mt-3">
                             </div>
                         </div>
                     </div>
@@ -98,7 +119,7 @@
                         <div id="collapseTwo" class="collapse accordion-body" aria-labelledby="headingTwo" data-parent="#accordionHelp">
                             <div class="card-body">
                                 <p>Após selecionar o título desejado no IMDb, na barra de endereço do seu navegador terá algo como <strong>www.imdb.com/title/<mark>tt0111161</mark>/</strong>. Copie este código exatamente como está no exemplo e cole no campo de pesquisa de nosso site.</p>
-                                <img src="imagem/modelolink.png" alt="" class="img-fluid mt-3">
+                                <img src="imagem/modelolink.png" alt="Modelo de link do IMDb" class="img-fluid mt-3">
                             </div>
                         </div>
                     </div>
@@ -113,7 +134,7 @@
                         </div>
                         <div id="collapseThree" class="collapse accordion-body" aria-labelledby="headingThree" data-parent="#accordionHelp">
                             <div class="card-body">
-                                <p>Se ao realizar sua pesquisa você receber uma mensagem informando que o acesso ao site não é permitido, por favor, atualize a página no seu navegador para concluir a pesquisa corretamente.</p>
+                                <p>Ao realizar sua pesquisa, se surgir uma mensagem informando que o acesso ao site não é permitido, por favor, atualize<i class="fas fa-sync refresh-icon" onclick="window.location.reload();"></i> a página no seu navegador para concluir a pesquisa corretamente.</p>
                             </div>
                         </div>
                     </div>
@@ -129,11 +150,11 @@
                         <div id="collapseFour" class="collapse accordion-body" aria-labelledby="headingFour" data-parent="#accordionHelp">
                             <div class="card-body">
                                 <p>Se você recebeu um erro ao pesquisar no BuscaFilmes, aqui estão alguns possíveis motivos:</p>
-                                <center><img src="imagem/atencao.png" alt="" class="img-fluid"></center>
+                                <center><img src="imagem/atencao.png" alt="Atenção" class="img-fluid"></center>
                                 <ol>
-                                    <li>Você copiou o código do IMDb incorretamente, por exemplo: <strong>TT0111161</strong></li>
+                                    <li>Você copiou o código do IMDb incorretamente, por exemplo: <strong>tt0111161</strong></li>
                                     <li>Você não selecionou corretamente o botão de Filme ou Série.</li>
-                                    <li>O título não está disponível na base de dados do servidor, escolha outro e realize a busca.</li>
+                                    <li>O título não está disponível na base de dados do servidor; escolha outro e realize a busca.</li>
                                 </ol>
                                 <p>Lembre-se sempre de selecionar a opção de Filme ou Série para que sua busca seja bem-sucedida.</p>
                             </div>
@@ -142,26 +163,14 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <p style="font-size: 24px;"><span class="typing-effect"></span></p>
+                    <p class="pulsing-text">Nem todos os títulos estão disponíveis!</p>
                 </div>
             </div>
         </div>
     </div>
 
-       <!-- Bootstrap JS e dependências opcionais (se necessário) -->
+    <!-- Bootstrap JS e dependências opcionais (se necessário) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Efeito de digitação no texto "NEM TODOS OS TÍTULOS ESTÃO DISPONÍVEL!"
-            var text = "NEM TODOS OS TÍTULOS ESTÃO DISPONÍVEL!";
-            var delay = 100;
-            $.each(text.split(''), function(i, letter){
-                setTimeout(function(){
-                    $('.typing-effect').html($('.typing-effect').html() + letter);
-                }, delay * i);
-            });
-        });
-    </script>
 </body>
 </html>
