@@ -113,16 +113,12 @@
             border: none;
         }
 
-        .accordion-content {
-            display: none;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
+        /* Estilos atualizados para os botões */
+        .btn-group label {
+            border-radius: 15px; /* Arredondar as bordas dos botões */
+            margin: 0 5px; /* Ajustar a margem entre os botões */
+            transition: background-color 0.3s, color 0.3s;
 
-        .accordion-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
     </style>
 </head>
@@ -319,17 +315,6 @@
             popup.style.display = 'none';
             iframe.src = ''; // Isso interrompe a reprodução do vídeo
         }
-
-        // Função para abrir ou fechar o acordeão
-        document.getElementById('imdb-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            var accordionContainer = document.getElementById('accordion-container');
-            if (accordionContainer.style.display === 'block') {
-                accordionContainer.style.display = 'none';
-            } else {
-                accordionContainer.style.display = 'block';
-            }
-        });
     </script>
 </body>
 </html>
