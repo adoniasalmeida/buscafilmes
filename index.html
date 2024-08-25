@@ -12,7 +12,7 @@
             font-family: 'Outfit', Arial, sans-serif;
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Adiciona um efeito de paralaxe */
+            background-attachment: fixed;
         }
 
         .centered {
@@ -29,9 +29,9 @@
         }
 
         .typing-effect {
-            overflow: hidden; /* Para garantir que o texto não escape da div */
-            white-space: nowrap; /* Evita quebras de linha */
-            border-right: 2px solid orange; /* Efeito de cursor piscando */
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid orange;
             animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
         }
 
@@ -51,13 +51,13 @@
         }
 
         .select {
-            background-color: #343a40; /* Cor de fundo */
-            color: #ffffff; /* Cor do texto */
+            background-color: #343a40;
+            color: #ffffff;
         }
 
         .select select {
-            background-color: #343a40; /* Cor de fundo */
-            color: #ffffff; /* Cor do texto */
+            background-color: #343a40;
+            color: #ffffff;
         }
 
         .popup {
@@ -67,7 +67,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -75,29 +75,54 @@
 
         .popup-content {
             background: white;
-            border-radius: 15px; /* Borda arredondada */
-            width: 80%; /* Ajuste o tamanho conforme necessário */
-            height: 80%; /* Ajuste o tamanho conforme necessário */
-            max-width: 1200px; /* Tamanho máximo */
-            max-height: 800px; /* Altura máxima */
+            border-radius: 15px;
+            width: 80%;
+            height: 80%;
+            max-width: 1200px;
+            max-height: 800px;
             position: relative;
-            overflow: hidden; /* Adiciona uma barra de rolagem se o conteúdo for maior */
+            overflow: hidden;
         }
 
         .popup-close {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: transparent;
+            background: #e74c3c; /* Cor de fundo do botão */
             border: none;
-            font-size: 24px; /* Tamanho do ícone */
-            color: #333;
+            border-radius: 50%; /* Botão redondo */
+            font-size: 36px; /* Aumenta o tamanho do ícone */
+            color: #fff; /* Cor do ícone */
             cursor: pointer;
-            transition: color 0.3s;
+            width: 40px; /* Largura do botão */
+            height: 40px; /* Altura do botão */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .popup-close:hover {
-            color: #555;
+            background: #c0392b; /* Cor de fundo ao passar o mouse */
+            color: #fff; /* Cor do ícone ao passar o mouse */
+        }
+
+        .popup-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .accordion-content {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .accordion-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -147,7 +172,7 @@
                                         <option value="5">Embedflix</option>
                                     </select>
                                 </div>
-                                <input type="text" id="pesquisa" class="form-control" maxlength="10" placeholder="Digite o código..." style="width: 200px;">
+                                <input type="text" id="pesquisa" class="form-control" placeholder="Cole a url IMDb aqui..." style="width: 200px;">
                                 <div class="input-group-append">
                                     <button id="submit-button" class="btn btn-danger" type="button">Pesquisar</button>
                                 </div>
@@ -156,7 +181,7 @@
 
                         <div class="row justify-content-center mb-3">
                             <p style="font-family:'Roboto', sans-serif;">
-                                <span class="typing-effect">www.imdb.com/title/<mark>tt0111161</mark>/ Copie, cole e pesquise!</span>
+                                <span class="typing-effect">Copie, cole e pesquise!</span>
                             </p>
                         </div>
                     </div>
@@ -176,13 +201,11 @@
         </div>
     </div>
 
-    <!-- Pop-up Container -->
-    <div id="popup" class="popup" style="display:none;">
+    <!-- Popup -->
+    <div id="popup" class="popup">
         <div class="popup-content">
-            <iframe id="popup-iframe" src="" width="100%" height="100%" style="border:none;"></iframe>
-            <button class="popup-close" onclick="closePopup()">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="popup-close" onclick="closePopup()">&times;</button>
+            <iframe id="popup-iframe" src="" frameborder="0"></iframe>
         </div>
     </div>
 
@@ -194,7 +217,7 @@
             'imagem/background.jpg',
             'imagem/background1.jpg',
             'imagem/background2.jpg',
-	    'imagem/background3.jpg',
+            'imagem/background3.jpg',
             'imagem/background4.png',
             // Adicione mais imagens conforme necessário
         ];
@@ -218,6 +241,13 @@
         $("#submit-button").on('click', function() {
             var query = '';
             var optionSelected = $("#select-opcao").val();
+            var inputValue = $("#pesquisa").val().trim(); // Captura o valor do campo de entrada
+
+            // Extraindo o código IMDb da URL se fornecido
+            var imdbCodeMatch = inputValue.match(/tt\d+/); // Expressão regular para encontrar o código IMDb
+            var imdbCode = imdbCodeMatch ? imdbCodeMatch[0] : inputValue; // Usa o código extraído ou o valor original
+
+            var url = '';
 
             if (optionSelected == "1") {
                 if ($("#filme-radio").is(":checked")) {
@@ -227,7 +257,7 @@
                     query += "serie/";
                 }
                 if (query) {
-                    window.location.href = "https://embed.warezcdn.com/" + query + $("#pesquisa").val();
+                    url = "https://embed.warezcdn.com/" + query + imdbCode;
                 }
             } else if (optionSelected == "2") {
                 if ($("#filme-radio").is(":checked")) {
@@ -237,7 +267,7 @@
                     query += "tvshow/";
                 }
                 if (query) {
-                    window.location.href = "https://warezstream.net/" + query + $("#pesquisa").val();
+                    url = "https://warezstream.net/" + query + imdbCode;
                 }
             } else if (optionSelected == "3") {
                 if ($("#filme-radio").is(":checked")) {
@@ -247,7 +277,7 @@
                     query += "tvshow/";
                 }
                 if (query) {
-                    window.location.href = "https://supercdn.org/" + query + $("#pesquisa").val();
+                    url = "https://supercdn.org/" + query + imdbCode;
                 }
             } else if (optionSelected == "4") {
                 if ($("#filme-radio").is(":checked")) {
@@ -257,7 +287,7 @@
                     query += "e/series?imdb=";
                 }
                 if (query) {
-                    window.location.href = "https://embedder.net/" + query + $("#pesquisa").val();
+                    url = "https://embedder.net/" + query + imdbCode;
                 }
             } else if (optionSelected == "5") {
                 if ($("#filme-radio").is(":checked")) {
@@ -267,24 +297,39 @@
                     query += "serie/";
                 }
                 if (query) {
-                    window.location.href = "https://embedflix.online/" + query + $("#pesquisa").val();
+                    url = "https://embedflix.online/" + query + imdbCode;
                 }
-            } else {
-                // Handle other options if needed
+            }
+
+            if (url) {
+                window.open(url, '_blank'); // Abre o resultado em uma nova aba
             }
         });
 
-        function openPopup(page) {
+        function openPopup(url) {
             var popup = document.getElementById('popup');
             var iframe = document.getElementById('popup-iframe');
-            iframe.src = page;
+            iframe.src = url;
             popup.style.display = 'flex';
         }
 
         function closePopup() {
             var popup = document.getElementById('popup');
+            var iframe = document.getElementById('popup-iframe');
             popup.style.display = 'none';
+            iframe.src = ''; // Isso interrompe a reprodução do vídeo
         }
+
+        // Função para abrir ou fechar o acordeão
+        document.getElementById('imdb-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            var accordionContainer = document.getElementById('accordion-container');
+            if (accordionContainer.style.display === 'block') {
+                accordionContainer.style.display = 'none';
+            } else {
+                accordionContainer.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
